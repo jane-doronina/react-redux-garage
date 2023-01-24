@@ -1,14 +1,48 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import 'bootstrap/dist/css/bootstrap.css';
 import './assets/stylesheets/index.scss';
-import App from './App';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import CarsIndex from './containers/cars-index';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Redirect, Routes } from 'react-router-dom';
+import { createBrowserHistory as history } from 'history';
+import reduxPromise from 'redux-promise';
+
+import carsReducer from "./reducers/cars-reducer"
+
+const garageName = `garage${Math.floor(10 + (Math.random() * 90))}`; //prompt("What is your garage?") ||
+const initialState = {
+  garage: garageName,
+  cars: [
+    { id: 1, brand: 'Peugeot', model: '106', owner: 'John', plate: 'WOB-ED-42' },
+    { id: 2, brand: 'Renault', model: 'Scenic', owner: 'Paul', plate: 'AAA-12-BC' },
+    { id: 3, brand: 'Aston Martin', model: 'DB Mark III', owner: 'James', plate: '418-ED-94' },
+    { id: 4, brand: 'VW', model: 'Beetle', owner: 'George', plate: '1234-XD-75' }
+  ]
+};
+
+const reducers = combineReducers({
+  garage: (state = null, action) => state,
+  cars: carsReducer
+});
+
+const middlewares = applyMiddleware(reduxPromise);
+
+const store = createStore(reducers, initialState, middlewares);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // <React.StrictMode>
+    <Provider store={store}>
+      <Router history={history}>
+        <Routes>
+          <Route path="/" element={<CarsIndex />} />
+        </Routes>
+      </Router>
+    </Provider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
