@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect, Routes } from 'react-router-dom';
 import { createBrowserHistory as history } from 'history';
 import reduxPromise from 'redux-promise';
+import logger from 'redux-logger';
 
 import carsReducer from "./reducers/cars-reducer"
 
@@ -28,7 +29,7 @@ const reducers = combineReducers({
   cars: carsReducer
 });
 
-const middlewares = applyMiddleware(reduxPromise);
+const middlewares = applyMiddleware(reduxPromise, logger);
 
 const store = createStore(reducers, initialState, middlewares);
 
