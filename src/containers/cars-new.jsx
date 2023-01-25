@@ -11,17 +11,19 @@ import "../assets/stylesheets/cars-new.scss";
 // VALIDATIONS
 
 const required = value => value ? undefined : 'Required'
+const plate = value => value && !/^[A-Z0-9-]+$/.test(value) ? 'Invalid plate number' : undefined
 
 const CarsNew = (props) => {
-  const renderField = (field) => {
+  const renderField = ({ input, label, type, placeholder, meta: { touched, error, warning } }) => {
     return (
     <div className="form-group">
-    <label>{field.label}</label>
+    <label>{label}</label>
     <input
     className="form-control"
-    type={field.type} placeholder={field.placeholder}
-    {...field.input}
+    type={type} placeholder={placeholder}
+    {...input}
     />
+    {touched && ((error && <span class="warning">{error}</span>) || (warning && <span class="warning">{warning}</span>))}
     </div>
     );
   }
@@ -69,9 +71,9 @@ const CarsNew = (props) => {
           type="text"
           placeholder="418-ED-94"
           component={renderField}
-          validate={ required }
+          validate={ [required, plate ] }
           />
-          <button className="btn btn-danger" type="submit" disabled={props.pristine || props.submitting} onClick={props.reset}>
+          <button className="btn btn-danger mt-3" type="submit" disabled={props.invalid || props.submitting}>
           Add car
           </button>
         </form>

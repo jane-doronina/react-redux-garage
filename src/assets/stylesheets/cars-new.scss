@@ -34,10 +34,16 @@
       label {
         font-weight: bolder;
         margin-bottom: 8px;
+        margin-top: 10px;
       }
 
       input {
-        margin-bottom: 15px;
+        // margin-bottom: 15px;
+      }
+
+      .warning {
+        color:red;
+        font-size: 0.9rem;
       }
     }
   }

@@ -3,7 +3,6 @@ import '../assets/stylesheets/cars-index.scss';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchCars } from '../actions';
-// import { Link } from 'react-router-dom';
 
 import SidePanel from '../components/side-panel';
 import CarCard from '../components/car-card';
