@@ -13,6 +13,7 @@ import { reducer as formReducer } from 'redux-form';
 
 import CarsIndex from './containers/cars-index';
 import CarsNew from './containers/cars-new';
+import CarsShow from './containers/cars-show';
 import carsReducer from "./reducers/cars-reducer"
 
 const garageName = `garage${Math.floor(10 + (Math.random() * 90))}`; //prompt("What is your garage?") ||
@@ -46,6 +47,7 @@ root.render(
         <Routes>
           <Route path="/" element={<CarsIndex />} />
           <Route path="/cars/new" element={<CarsNew />} />
+          <Route path="/cars/:id" element={<CarsShow />} />
         </Routes>
       </Router>
     </Provider>

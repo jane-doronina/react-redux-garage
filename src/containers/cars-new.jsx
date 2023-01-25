@@ -8,6 +8,10 @@ import { useNavigate } from "react-router-dom";
 import SidePanel from '../components/side-panel';
 import "../assets/stylesheets/cars-new.scss";
 
+// VALIDATIONS
+
+const required = value => value ? undefined : 'Required'
+
 const CarsNew = (props) => {
   const renderField = (field) => {
     return (
@@ -15,7 +19,7 @@ const CarsNew = (props) => {
     <label>{field.label}</label>
     <input
     className="form-control"
-    type={field.type}
+    type={field.type} placeholder={field.placeholder}
     {...field.input}
     />
     </div>
@@ -31,7 +35,7 @@ const CarsNew = (props) => {
   }
 
   return(
-    <div className="cars-show">
+    <div className="cars-new">
       <SidePanel garage={props.garage} path="/" text="Back to list" />
       <div className="form-div">
         <form onSubmit={props.handleSubmit(onSubmit)}>
@@ -39,27 +43,35 @@ const CarsNew = (props) => {
           label="Brand"
           name="brand"
           type="text"
+          placeholder="Aston Martin"
           component={renderField}
+          validate={ required }
           />
           <Field
           label="Model"
           name="model"
           type="text"
+          placeholder="DB Mark III"
           component={renderField}
+          validate={ required }
           />
           <Field
           label="Owner"
           name="owner"
           type="text"
+          placeholder="James Bond"
           component={renderField}
+          validate={ required }
           />
           <Field
           label="Plate"
           name="plate"
           type="text"
+          placeholder="418-ED-94"
           component={renderField}
+          validate={ required }
           />
-          <button className="btn btn-danger" type="submit">
+          <button className="btn btn-danger" type="submit" disabled={props.pristine || props.submitting} onClick={props.reset}>
           Add car
           </button>
         </form>

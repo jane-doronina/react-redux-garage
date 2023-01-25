@@ -14,6 +14,10 @@ class CarsIndex extends React.Component {
     this.props.fetchCars(this.props.garage);
   }
 
+  componentDidUpdate() {
+    this.props.fetchCars(this.props.garage);
+  }
+
   render() {
     if (this.props.cars.length === 0) {
       return(
@@ -29,8 +33,8 @@ class CarsIndex extends React.Component {
     <div className="cars-index">
       <SidePanel garage={this.props.garage} path="/cars/new" text="Add a car" />
       <div className='cars-list'>
-        {this.props.cars.map((car, i) => {
-          return <CarCard key={i} car={car} />
+        {this.props.cars.map((car) => {
+          return <CarCard key={car.id} car={car} />
         })}
       </div>
     </div>);
