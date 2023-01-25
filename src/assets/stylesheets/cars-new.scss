@@ -1,0 +1,44 @@
+.cars-show {
+  display: flex;
+  margin: 40px;
+  border-radius: 7px;
+  background-color: rgb(221, 221, 221);
+  position:relative;
+
+
+  .form-div {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+
+
+    &::before {
+      content: "";
+      background-size: cover;
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 80%;
+      background-image: url("../images/form.jpeg");
+      opacity: 0.6;
+    }
+
+    form {
+      background-color: white;
+      width: 30%;
+      padding: 50px;
+      z-index: 1;
+
+      label {
+        font-weight: bolder;
+        margin-bottom: 8px;
+      }
+
+      input {
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

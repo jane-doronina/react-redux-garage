@@ -3,19 +3,21 @@ import ReactDOM from 'react-dom/client';
 import 'bootstrap/dist/css/bootstrap.css';
 import './assets/stylesheets/index.scss';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import CarsIndex from './containers/cars-index';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect, Routes } from 'react-router-dom';
-import { createBrowserHistory as history } from 'history';
+import { createBrowserHistory } from 'history';
 import reduxPromise from 'redux-promise';
 import logger from 'redux-logger';
+import { reducer as formReducer } from 'redux-form';
 
+import CarsIndex from './containers/cars-index';
+import CarsNew from './containers/cars-new';
 import carsReducer from "./reducers/cars-reducer"
 
 const garageName = `garage${Math.floor(10 + (Math.random() * 90))}`; //prompt("What is your garage?") ||
 const initialState = {
-  garage: garageName,
+  garage: "garage48",
   cars: [
     { id: 1, brand: 'Peugeot', model: '106', owner: 'John', plate: 'WOB-ED-42' },
     { id: 2, brand: 'Renault', model: 'Scenic', owner: 'Paul', plate: 'AAA-12-BC' },
@@ -24,9 +26,12 @@ const initialState = {
   ]
 };
 
+const history = createBrowserHistory();
+
 const reducers = combineReducers({
   garage: (state = null, action) => state,
-  cars: carsReducer
+  cars: carsReducer,
+  form: formReducer
 });
 
 const middlewares = applyMiddleware(reduxPromise, logger);
@@ -40,6 +45,7 @@ root.render(
       <Router history={history}>
         <Routes>
           <Route path="/" element={<CarsIndex />} />
+          <Route path="/cars/new" element={<CarsNew />} />
         </Routes>
       </Router>
     </Provider>

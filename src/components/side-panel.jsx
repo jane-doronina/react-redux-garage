@@ -9,9 +9,9 @@ const SidePanel = (props) => {
       <img className="img-bg" src={mechanic} alt="Mechanic during work"></img>
       <img className="logo-red" src={logo} alt="#"></img>
       <div className="side-panel-info">
-        <h1>Garage</h1>
+        <h1>{props.garage}</h1>
         <p>Our garage is the best. Reasonable prices, always on time, we are the best (and fictional).</p>
-        <Link to="/cars/new" className="w-100 btn btn-lg btn-outline-dark">Add a car</Link>
+        <Link to={props.path} className="w-100 btn btn-lg btn-outline-dark">{props.text}</Link>
       </div>
     </div>
   )

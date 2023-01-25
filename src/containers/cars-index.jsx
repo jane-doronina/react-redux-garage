@@ -1,10 +1,12 @@
 import React from 'react';
 import '../assets/stylesheets/cars-index.scss';
 import { connect } from 'react-redux';
-import SidePanel from '../components/side-panel';
-import CarCard from '../components/car-card';
 import { bindActionCreators } from 'redux';
 import { fetchCars } from '../actions';
+// import { Link } from 'react-router-dom';
+
+import SidePanel from '../components/side-panel';
+import CarCard from '../components/car-card';
 
 class CarsIndex extends React.Component {
 
@@ -16,7 +18,7 @@ class CarsIndex extends React.Component {
     if (this.props.cars.length === 0) {
       return(
         <div className="cars-index">
-          <SidePanel />
+          <SidePanel garage={this.props.garage} path="/cars/new" text="Add a car" />
           <div className="cars-list">
             <p class="no-car">No cars added yet.</p>
           </div>
@@ -25,10 +27,10 @@ class CarsIndex extends React.Component {
     } else {
     return(
     <div className="cars-index">
-      <SidePanel />
+      <SidePanel garage={this.props.garage} path="/cars/new" text="Add a car" />
       <div className='cars-list'>
-        {this.props.cars.map((car) => {
-          return <CarCard key={car.id} car={car} />
+        {this.props.cars.map((car, i) => {
+          return <CarCard key={i} car={car} />
         })}
       </div>
     </div>);
